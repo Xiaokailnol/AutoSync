@@ -1,0 +1,50 @@
+name: openwrt_ipk
+
+on:
+#  schedule:
+#    - cron: 0 */4 * * *
+  repository_dispatch:
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: openwrt_ipk
+    if: github.event.repository.owner.id == github.event.sender.id || ! github.event.sender.id
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
+    strategy:
+      matrix:
+        target:
+          - aarch64_generic
+          - x86_64
+        sdk:
+          - 24.10.5
+
+    steps:
+    - name: Checkout
+      continue-on-error: true
+      uses: actions/checkout@main
+      with:
+        ref: ${{ matrix.target }}
+
+    - name: Sync IPK
+      run: |
+        latest_release=$(curl -s "https://api.github.com/repos/Xiaokailnol/openwrt_packages/releases/latest" | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/')
+        curl -L -o "${{ matrix.sdk }}-${{ matrix.target }}.zip" "https://github.com/Xiaokailnol/openwrt_packages/releases/download/$latest_release/${{ matrix.sdk }}-${{ matrix.target }}.zip"
+        mkdir -p sdk && unzip "${{ matrix.sdk }}-${{ matrix.target }}.zip" -d sdk
+        rm -rf ${{ matrix.sdk }}-${{ matrix.target }}.zip
+
+    - name: Git push
+      continue-on-error: true
+      run: |
+        git config user.name "github-actions"
+        git config user.email "actions@github.com"
+        cd sdk
+        git remote add origin https://github.com/Xiaokailnol/AutoSync/blob/openwrt_packages.git
+        git init
+        git add .
+        Emoji=("🎉" "🤞" "✨" "🎁" "🎈" "🎄" "🎨" "💋" "🍓" "🍕" "🍉" "💐" "🌴" "🚀" "🛸" "🗽" "⛅" "🌈" "🔥" "⛄" "🐶" "🏅" "🦄" "🐤")
+        git commit -am "${Emoji[$[$RANDOM % ${#Emoji[@]}]]} Sync $(date +%Y-%m-%d" "%H:%M:%S)"
+        git push "https://${{ github.actor }}:${{ secrets.GH_TOKEN }}@github.com/openwrt_packages" HEAD:${{ matrix.target }}
