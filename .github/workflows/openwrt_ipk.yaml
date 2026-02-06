@@ -23,12 +23,6 @@ jobs:
           - 24.10.5
 
     steps:
-    - name: Checkout
-      continue-on-error: true
-      uses: actions/checkout@main
-      with:
-        ref: ${{ matrix.target }}
-
     - name: Sync IPK
       run: |
         latest_release=$(curl -s "https://api.github.com/repos/Xiaokailnol/openwrt_packages/releases/latest" | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/')
