@@ -40,5 +40,5 @@ jobs:
         git remote add origin https://github.com/Xiaokailnol/openwrt_packages.git
         git add .
         Emoji=("🎉" "🤞" "✨" "🎁" "🎈" "🎄" "🎨" "💋" "🍓" "🍕" "🍉" "💐" "🌴" "🚀" "🛸" "🗽" "⛅" "🌈" "🔥" "⛄" "🐶" "🏅" "🦄" "🐤")
-        git commit -am "${Emoji[$[$RANDOM % ${#Emoji[@]}]]} Sync $(date +%Y-%m-%d" "%H:%M:%S)"
+        git commit -m "${Emoji[$[$RANDOM % ${#Emoji[@]}]]} Sync $(date +%Y-%m-%d" "%H:%M:%S)"
         git push "https://${{ github.actor }}:${{ secrets.ACCESS_TOKEN }}@github.com/openwrt_packages" HEAD:${{ matrix.target }}
