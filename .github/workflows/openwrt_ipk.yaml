@@ -25,7 +25,7 @@ jobs:
         set -e
         latest_release=$(curl -s "https://api.github.com/repos/Xiaokailnol/openwrt_packages/releases/latest" | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/')
         echo "Latest release: $latest_release"
-        curl -L -o "${{ matrix.sdk }}-${{ matrix.target }}.zip" "https://github.com/Xiaokailnol/openwrt_packages/releases/download/$latest_release/${{ matrix.sdk }}-${{ matrix.target }}.zip"
+        curl -L -o "${{ matrix.sdk }}-${{ matrix.target }}.zip" "https://github.com/Xiaokailnol/openwrt_packages/releases/download/$latest_release/${{ matrix.target }}-${{ matrix.sdk }}.zip"
         mkdir -p sdk
         unzip -o "${{ matrix.sdk }}-${{ matrix.target }}.zip" -d sdk
         rm -f "${{ matrix.sdk }}-${{ matrix.target }}.zip"
