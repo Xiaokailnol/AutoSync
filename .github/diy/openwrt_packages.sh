@@ -22,8 +22,8 @@ curl -s https://raw.githubusercontent.com/istoreos/istoreos/refs/heads/istoreos-
 curl -s https://github.com/istoreos/istoreos/raw/refs/heads/istoreos-24.10/package/istoreos-files/files/www/luci-static/resources/easepi/iconfont.ttf > luci-theme-argon/luci-static/resources/easepi/iconfont.ttf
 curl -s https://github.com/istoreos/istoreos/raw/refs/heads/istoreos-24.10/package/istoreos-files/files/www/luci-static/resources/easepi/iconfont.woff > luci-theme-argon/luci-static/resources/easepi/iconfont.woff
 curl -s https://github.com/istoreos/istoreos/raw/refs/heads/istoreos-24.10/package/istoreos-files/files/www/luci-static/resources/easepi/iconfont.woff2 > luci-theme-argon/luci-static/resources/easepi/iconfont.woff2
-sed -i '/favicon.ico">/a\
-<link rel="stylesheet" href="{{ resource }}/easepi/easeicon.css?t=1749538073338>' \
+sed -i '/<link rel="icon" type="image\/x-icon" href="{{ media }}\/favicon.ico">/a\
+\t<link rel="stylesheet" href="{{ resource }}/easepi/easeicon.css?t=1749538073338">' \
 luci-theme-argon/ucode/template/themes/argon/header.ut
 git clone --depth 1 -b master https://github.com/jerrykuku/luci-app-argon-config
 sed -i "s/option online_wallpaper 'bing'/option online_wallpaper 'none'/g" luci-app-argon-config/root/etc/config/argon
