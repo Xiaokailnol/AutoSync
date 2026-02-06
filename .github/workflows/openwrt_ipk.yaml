@@ -36,8 +36,8 @@ jobs:
         git config user.name "github-actions"
         git config user.email "actions@github.com"
         cd sdk
-        git remote add origin https://github.com/Xiaokailnol/AutoSync/blob/openwrt_packages.git
         git init
+        git remote add origin https://github.com/Xiaokailnol/openwrt_packages.git
         git add .
         Emoji=("🎉" "🤞" "✨" "🎁" "🎈" "🎄" "🎨" "💋" "🍓" "🍕" "🍉" "💐" "🌴" "🚀" "🛸" "🗽" "⛅" "🌈" "🔥" "⛄" "🐶" "🏅" "🦄" "🐤")
         git commit -am "${Emoji[$[$RANDOM % ${#Emoji[@]}]]} Sync $(date +%Y-%m-%d" "%H:%M:%S)"
