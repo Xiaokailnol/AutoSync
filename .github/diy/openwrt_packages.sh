@@ -18,10 +18,10 @@ git clone --depth 1 -b openwrt-25.12 https://github.com/sbwml/autocore-arm
 git clone --depth 1 -b master https://github.com/jerrykuku/luci-theme-argon
 curl -s https://cdn.jsdelivr.net/gh/Xiaokailnol/AutoSync/images/bg1.jpg > luci-theme-argon/htdocs/luci-static/argon/img/bg1.jpg
 mkdir -p luci-theme-argon/luci-static/resources/easepi
-curl -s https://github.com/Xiaokailnol/AutoSync/releases/download/icon/easeicon.css > luci-theme-argon/luci-static/resources/easepi/easeicon.css
-curl -s https://github.com/Xiaokailnol/AutoSync/releases/download/icon/iconfont.ttf > luci-theme-argon/luci-static/resources/easepi/iconfont.ttf
-curl -s https://github.com/Xiaokailnol/AutoSync/releases/download/icon/iconfont.woff > luci-theme-argon/luci-static/resources/easepi/iconfont.woff
-curl -s https://github.com/Xiaokailnol/AutoSync/releases/download/icon/iconfont.woff2 > luci-theme-argon/luci-static/resources/easepi/iconfont.woff2
+curl -sL https://github.com/Xiaokailnol/AutoSync/releases/download/icon/easeicon.css -o luci-theme-argon/luci-static/resources/easepi/easeicon.css
+curl -sL https://github.com/Xiaokailnol/AutoSync/releases/download/icon/iconfont.ttf -o luci-theme-argon/luci-static/resources/easepi/iconfont.ttf
+curl -sL https://github.com/Xiaokailnol/AutoSync/releases/download/icon/iconfont.woff -o luci-theme-argon/luci-static/resources/easepi/iconfont.woff
+curl -sL https://github.com/Xiaokailnol/AutoSync/releases/download/icon/iconfont.woff2 -o luci-theme-argon/luci-static/resources/easepi/iconfont.woff2
 sed -i '/<link rel="icon" type="image\/x-icon" href="{{ media }}\/favicon.ico">/a\
 \t<link rel="stylesheet" href="{{ resource }}/easepi/easeicon.css?t=1749538073338">' \
 luci-theme-argon/ucode/template/themes/argon/header.ut
