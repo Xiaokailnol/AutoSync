@@ -27,8 +27,8 @@ jobs:
         echo "Latest release: $latest_packages_release"
         latest_helloworld_release=$(curl -s "https://api.github.com/repos/Xiaokailnol/openwrt_helloworld/releases/latest" | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/')
         echo "Latest release: $latest_helloworld_release"
-        curl -L -o "packages-${{ matrix.target }}-${{ matrix.sdk }}.zip" "https://github.com/Xiaokailnol/openwrt_packages/releases/download/$latest_release/${{ matrix.target }}-${{ matrix.sdk }}.zip"
-        curl -L -o "helloworld-${{ matrix.target }}-${{ matrix.sdk }}.zip" "https://github.com/Xiaokailnol/openwrt_helloworld/releases/download/$latest_release/${{ matrix.target }}-${{ matrix.sdk }}.zip"
+        curl -L -o "packages-${{ matrix.target }}-${{ matrix.sdk }}.zip" "https://github.com/Xiaokailnol/openwrt_packages/releases/download/$latest_packages_release/${{ matrix.target }}-${{ matrix.sdk }}.zip"
+        curl -L -o "helloworld-${{ matrix.target }}-${{ matrix.sdk }}.zip" "https://github.com/Xiaokailnol/openwrt_helloworld/releases/download/$latest_helloworld_release/${{ matrix.target }}-${{ matrix.sdk }}.zip"
         mkdir -p sdk
         unzip -o "packages-${{ matrix.target }}-${{ matrix.sdk }}.zip" -d sdk
         unzip -o "helloworld-${{ matrix.target }}-${{ matrix.sdk }}.zip" -d sdk
