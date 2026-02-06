@@ -29,3 +29,12 @@ git clone --depth 1 -b main https://github.com/sbwml/luci-app-openlist2 openwrt-
 git clone --depth 1 -b main https://github.com/sbwml/luci-app-quickfile openwrt-quickfile && mv -n openwrt-quickfile/{quickfile,luci-app-quickfile} ./; rm -rf openwrt-quickfile
 git clone --depth 1 -b main https://github.com/sirpdboy/luci-app-netwizard openwrt-netwizard && mv -n openwrt-netwizard/luci-app-netwizard ./; rm -rf openwrt-netwizard
 git clone --depth 1 -b main https://github.com/sirpdboy/luci-app-adguardhome openwrt-adguardhome && mv -n openwrt-adguardhome/luci-app-adguardhome ./; rm -rf openwrt-adguardhome
+
+sed -i \
+-e 's?include \.\./\.\./\(lang\|devel\)?include $(TOPDIR)/feeds/packages/\1?' \
+-e 's?\.\./\.\./luci.mk?$(TOPDIR)/feeds/luci/luci.mk?' \
+-e 's/ca-certificates/ca-bundle/' \
+*/Makefile
+
+rm -rf ./*/.git ./*/.gitattributes ./*/.svn ./*/.github ./*/.gitignore create_acl_for_luci.err create_acl_for_luci.ok create_acl_for_luci.warn
+exit 0
