@@ -25,8 +25,8 @@ jobs:
 
     - name: Initialization environment
       run : |
-        git config --global user.email "2519840456@qq.com"
-        git config --global user.name "Xiaokailnol"
+        git config user.name "github-actions"
+        git config user.email "actions@github.com"
         
     - name: Clone packages
       run: |
