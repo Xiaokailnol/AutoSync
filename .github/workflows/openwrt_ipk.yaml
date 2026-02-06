@@ -23,12 +23,17 @@ jobs:
     - name: Sync IPK
       run: |
         set -e
-        latest_release=$(curl -s "https://api.github.com/repos/Xiaokailnol/openwrt_packages/releases/latest" | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/')
-        echo "Latest release: $latest_release"
-        curl -L -o "${{ matrix.sdk }}-${{ matrix.target }}.zip" "https://github.com/Xiaokailnol/openwrt_packages/releases/download/$latest_release/${{ matrix.target }}-${{ matrix.sdk }}.zip"
+        latest_packages_release=$(curl -s "https://api.github.com/repos/Xiaokailnol/openwrt_packages/releases/latest" | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/')
+        echo "Latest release: $latest_packages_release"
+        latest_helloworld_release=$(curl -s "https://api.github.com/repos/Xiaokailnol/openwrt_helloworld/releases/latest" | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/')
+        echo "Latest release: $latest_helloworld_release"
+        curl -L -o "packages-${{ matrix.target }}-${{ matrix.sdk }}.zip" "https://github.com/Xiaokailnol/openwrt_packages/releases/download/$latest_release/${{ matrix.target }}-${{ matrix.sdk }}.zip"
+        curl -L -o "helloworld-${{ matrix.target }}-${{ matrix.sdk }}.zip" "https://github.com/Xiaokailnol/openwrt_helloworld/releases/download/$latest_release/${{ matrix.target }}-${{ matrix.sdk }}.zip"
         mkdir -p sdk
-        unzip -o "${{ matrix.sdk }}-${{ matrix.target }}.zip" -d sdk
-        rm -f "${{ matrix.sdk }}-${{ matrix.target }}.zip"
+        unzip -o "packages-${{ matrix.target }}-${{ matrix.sdk }}.zip" -d sdk
+        unzip -o "helloworld-${{ matrix.target }}-${{ matrix.sdk }}.zip" -d sdk
+        rm -f "packages-${{ matrix.target }}-${{ matrix.sdk }}.zip"
+        rm -f "helloworld-${{ matrix.target }}-${{ matrix.sdk }}.zip"
 
     - name: Git push
       run: |
@@ -47,8 +52,8 @@ jobs:
         git branch -M ${{ matrix.target }} || true
 
         # 设置远程 origin
-        git remote add origin https://github.com/Xiaokailnol/openwrt_packages.git 2>/dev/null || true
-        git remote set-url origin https://${{ github.actor }}:${{ secrets.ACCESS_TOKEN }}@github.com/Xiaokailnol/openwrt_packages.git
+        git remote add origin https://github.com/Xiaokailnol/Extras-packages.git 2>/dev/null || true
+        git remote set-url origin https://${{ github.actor }}:${{ secrets.ACCESS_TOKEN }}@github.com/Xiaokailnol/Extras-packages.git
 
         git add .
 
