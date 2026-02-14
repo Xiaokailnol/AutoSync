@@ -14,21 +14,9 @@ function mvdir() {
 mv -n `find $1/* -maxdepth 0 -type d` ./
 rm -rf $1
 }
-git clone --depth 1 -b openwrt-25.12 https://github.com/sbwml/autocore-arm
-git clone --depth 1 -b master https://github.com/jerrykuku/luci-theme-argon
-curl -s https://cdn.jsdelivr.net/gh/Xiaokailnol/AutoSync/images/bg1.jpg > luci-theme-argon/htdocs/luci-static/argon/img/bg1.jpg
-mkdir -p luci-theme-argon/luci-static/resources/easepi
-curl -sL https://github.com/Xiaokailnol/AutoSync/releases/download/icon/easeicon.css -o luci-theme-argon/luci-static/resources/easepi/easeicon.css
-curl -sL https://github.com/Xiaokailnol/AutoSync/releases/download/icon/iconfont.ttf -o luci-theme-argon/luci-static/resources/easepi/iconfont.ttf
-curl -sL https://github.com/Xiaokailnol/AutoSync/releases/download/icon/iconfont.woff -o luci-theme-argon/luci-static/resources/easepi/iconfont.woff
-curl -sL https://github.com/Xiaokailnol/AutoSync/releases/download/icon/iconfont.woff2 -o luci-theme-argon/luci-static/resources/easepi/iconfont.woff2
-sed -i '/<link rel="icon" type="image\/x-icon" href="{{ media }}\/favicon.ico">/a\
-\t<link rel="stylesheet" href="{{ resource }}/easepi/easeicon.css?t=1749538073338">' \
-luci-theme-argon/ucode/template/themes/argon/header.ut
-git clone --depth 1 -b master https://github.com/jerrykuku/luci-app-argon-config
-sed -i "s/option online_wallpaper 'bing'/option online_wallpaper 'none'/g" luci-app-argon-config/root/etc/config/argon
 git clone --depth 1 -b master https://github.com/sirpdboy/luci-theme-kucat
 git clone --depth 1 -b master https://github.com/sirpdboy/luci-app-kucat-config
+git clone --depth 1 -b openwrt-25.12 https://github.com/sbwml/luci-theme-argon theme-argon && mv -n theme-argon/{luci-app-argon-config,luci-theme-argon} ./; rm -rf theme-argon
 git clone --depth 1 -b main https://github.com/sbwml/openwrt_pkgs && mv -n openwrt_pkgs/{vlmcsd,fw_download_tool,luci-app-socat,luci-app-ramfree,luci-app-diskman,luci-app-wolplus,bash-completion,luci-app-vlmcsd,luci-app-ota,luci-app-vsftpd} ./; rm -rf openwrt_pkgs
 git clone --depth 1 -b master https://github.com/sbwml/luci-app-mentohust openwrt_mentohust && mv -n openwrt_mentohust/{luci-app-mentohust,mentohust} ./; rm -rf openwrt_mentohust
 git clone --depth 1 -b master https://github.com/destan19/OpenAppFilter && mv -n OpenAppFilter/{oaf,open-app-filter,luci-app-oaf} ./; rm -rf OpenAppFilter
