@@ -28,13 +28,13 @@ git clone --depth 1 -b main https://github.com/sbwml/luci-app-quickfile openwrt-
 git clone --depth 1 -b main https://github.com/sirpdboy/luci-app-netwizard openwrt-netwizard && mv -n openwrt-netwizard/luci-app-netwizard ./; rm -rf openwrt-netwizard
 git clone --depth 1 -b main https://github.com/Xiaokailnol/luci-app-adguardhome openwrt-adguardhome && mv -n openwrt-adguardhome/luci-app-adguardhome ./; rm -rf openwrt-adguardhome
 git clone --depth 1 -b main https://github.com/timsaya/openwrt-bandix bandix && mv -n bandix/openwrt-bandix ./; rm -rf bandix
-git clone --depth 1 -b main https://github.com/timsaya/luci-app-bandix openwrt-bandix mv -n openwrt-bandix/luci-app-bandix ./; rm -rf openwrt-bandix
-git clone --depth 1 -b main https://github.com/sbwml/luci-app-quickfile openwrt-quickfile mv -n openwrt-quickfile/{luci-app-quickfile,quickfile} ./; rm -rf openwrt-quickfile
-git clone --depth 1 -b main https://github.com/sbwml/luci-app-airplay2 openwrt-airplay2 mv -n openwrt-airplay2/{airplay2,luci-app-airplay2} ./; rm -rf openwrt-airplay2
+git clone --depth 1 -b main https://github.com/timsaya/luci-app-bandix openwrt-bandix && mv -n openwrt-bandix/luci-app-bandix ./; rm -rf openwrt-bandix
+git clone --depth 1 -b main https://github.com/sbwml/luci-app-quickfile openwrt-quickfile && mv -n openwrt-quickfile/{luci-app-quickfile,quickfile} ./; rm -rf openwrt-quickfile
+git clone --depth 1 -b main https://github.com/sbwml/luci-app-airplay2 openwrt-airplay2 && mv -n openwrt-airplay2/{airplay2,luci-app-airplay2} ./; rm -rf openwrt-airplay2
 git clone --depth 1 -b openwrt-24.10 https://github.com/sbwml/luci-app-webdav
-git clone --depth 1 -b main https://github.com/sbwml/luci-app-airconnect openwrt-airconnect mv -n openwrt-airconnect/{airconnect,luci-app-airconnect} ./; rm -rf openwrt-airconnect
-git clone --depth 1 -b master https://github.com/sbwml/luci-app-qbittorrent openwrt-qbittorrent mv -n openwrt-qbittorrent/{qt6base,qt6tools,rblibtorrent,qbittorrent,luci-app-qbittorrent} ./; rm -rf openwrt-qbittorrent
-git clone --depth 1 -b master https://github.com/sbwml/luci-app-mentohust openwrt-mentohust mv -n openwrt-mentohust/{mentohust,luci-app-mentohust} ./; rm -rf openwrt-mentohust
+git clone --depth 1 -b main https://github.com/sbwml/luci-app-airconnect openwrt-airconnect && mv -n openwrt-airconnect/{airconnect,luci-app-airconnect} ./; rm -rf openwrt-airconnect
+git clone --depth 1 -b master https://github.com/sbwml/luci-app-qbittorrent openwrt-qbittorrent && mv -n openwrt-qbittorrent/{qt6base,qt6tools,rblibtorrent,qbittorrent,luci-app-qbittorrent} ./; rm -rf openwrt-qbittorrent
+git clone --depth 1 -b master https://github.com/sbwml/luci-app-mentohust openwrt-mentohust && mv -n openwrt-mentohust/{mentohust,luci-app-mentohust} ./; rm -rf openwrt-mentohust
 
 sed -i \
 -e 's?include \.\./\.\./\(lang\|devel\)?include $(TOPDIR)/feeds/packages/\1?' \
