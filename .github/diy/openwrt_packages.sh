@@ -27,6 +27,10 @@ git clone --depth 1 -b main https://github.com/sbwml/luci-app-openlist2 openwrt-
 git clone --depth 1 -b main https://github.com/sbwml/luci-app-quickfile openwrt-quickfile && mv -n openwrt-quickfile/{quickfile,luci-app-quickfile} ./; rm -rf openwrt-quickfile
 git clone --depth 1 -b main https://github.com/sirpdboy/luci-app-netwizard openwrt-netwizard && mv -n openwrt-netwizard/luci-app-netwizard ./; rm -rf openwrt-netwizard
 git clone --depth 1 -b main https://github.com/Xiaokailnol/luci-app-adguardhome openwrt-adguardhome && mv -n openwrt-adguardhome/luci-app-adguardhome ./; rm -rf openwrt-adguardhome
+git clone --depth 1 -b main https://github.com/timsaya/openwrt-bandix bandix && mv -n bandix/openwrt-bandix ./; rm -rf bandix
+git clone --depth 1 -b main https://github.com/timsaya/luci-app-bandix openwrt-bandix mv -n openwrt-bandix/luci-app-bandix ./; rm -rf openwrt-bandix
+git clone --depth 1 -b main https://github.com/sbwml/luci-app-quickfile openwrt-quickfile mv -n openwrt-quickfile/{luci-app-quickfile,quickfile} ./; rm -rf openwrt-quickfile
+git clone --depth 1 -b main https://github.com/sbwml/luci-app-airplay2 openwrt-airplay2 mv -n openwrt-airplay2/{airplay2,luci-app-airplay2} ./; rm -rf openwrt-airplay2
 
 sed -i \
 -e 's?include \.\./\.\./\(lang\|devel\)?include $(TOPDIR)/feeds/packages/\1?' \
