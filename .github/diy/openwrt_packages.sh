@@ -27,8 +27,8 @@ git clone --depth 1 -b main https://github.com/sbwml/luci-app-openlist2 openwrt-
 git clone --depth 1 -b main https://github.com/sbwml/luci-app-quickfile openwrt-quickfile && mv -n openwrt-quickfile/{quickfile,luci-app-quickfile} ./; rm -rf openwrt-quickfile
 git clone --depth 1 -b main https://github.com/sirpdboy/luci-app-netwizard openwrt-netwizard && mv -n openwrt-netwizard/luci-app-netwizard ./; rm -rf openwrt-netwizard
 git clone --depth 1 -b main https://github.com/sirpdboy/luci-app-adguardhome openwrt-adguardhome && mv -n openwrt-adguardhome/luci-app-adguardhome ./; rm -rf openwrt-adguardhome
-echo -e "\nmsgid \"Base Setting\"" >> openwrt-adguardhome/luci-app-adguardhome/po/zh_Hans/AdGuardHome.po
-echo -e "msgstr \"基础设置\"" >> openwrt-adguardhome/luci-app-adguardhome/po/zh_Hans/AdGuardHome.po
+echo -e "\nmsgid \"Base Setting\"" >> luci-app-adguardhome/po/zh_Hans/AdGuardHome.po
+echo -e "msgstr \"基础设置\"" >> luci-app-adguardhome/po/zh_Hans/AdGuardHome.po
 
 sed -i \
 -e 's?include \.\./\.\./\(lang\|devel\)?include $(TOPDIR)/feeds/packages/\1?' \
