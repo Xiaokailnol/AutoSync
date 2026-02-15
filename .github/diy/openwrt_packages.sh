@@ -16,6 +16,8 @@ rm -rf $1
 }
 git clone --depth 1 -b master https://github.com/sirpdboy/luci-theme-kucat
 git clone --depth 1 -b master https://github.com/sirpdboy/luci-app-kucat-config
+git clone --depth 1 -b master https://github.com/eamonxg/luci-theme-aurora
+git clone --depth 1 -b master https://github.com/eamonxg/luci-app-aurora-config
 git clone --depth 1 -b openwrt-25.12 https://github.com/Xiaokailnol/luci-theme-argon theme-argon && mv -n theme-argon/{luci-app-argon-config,luci-theme-argon} ./; rm -rf theme-argon
 git clone --depth 1 -b main https://github.com/sbwml/openwrt_pkgs && mv -n openwrt_pkgs/{vlmcsd,fw_download_tool,luci-app-socat,luci-app-ramfree,luci-app-diskman,luci-app-wolplus,bash-completion,luci-app-vlmcsd,luci-app-ota,luci-app-vsftpd} ./; rm -rf openwrt_pkgs
 git clone --depth 1 -b master https://github.com/sbwml/luci-app-mentohust openwrt_mentohust && mv -n openwrt_mentohust/{luci-app-mentohust,mentohust} ./; rm -rf openwrt_mentohust
