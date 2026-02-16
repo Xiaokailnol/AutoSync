@@ -32,6 +32,7 @@ git clone --depth 1 -b main https://github.com/timsaya/openwrt-bandix bandix-pkg
 git clone --depth 1 -b main https://github.com/timsaya/luci-app-bandix bandix-luci && mv -n bandix-luci/luci-app-bandix ./; rm -rf bandix-luci
 git clone --depth 1 -b main https://github.com/sbwml/luci-app-airplay2 openwrt-airplay2 && mv -n openwrt-airplay2/{airplay2,luci-app-airplay2} ./; rm -rf openwrt-airplay2
 git clone --depth 1 -b openwrt-24.10 https://github.com/sbwml/luci-app-webdav
+git clone --depth 1 -b js https://github.com/UnblockNeteaseMusic/luci-app-unblockneteasemusic
 git clone --depth 1 -b main https://github.com/sbwml/luci-app-airconnect openwrt-airconnect && mv -n openwrt-airconnect/{airconnect,luci-app-airconnect} ./; rm -rf openwrt-airconnect
 git clone --depth 1 -b master https://github.com/sbwml/luci-app-qbittorrent openwrt-qbittorrent && mv -n openwrt-qbittorrent/{qt6base,qt6tools,rblibtorrent,qbittorrent,luci-app-qbittorrent} ./; rm -rf openwrt-qbittorrent
 git clone --depth 1 -b main https://github.com/linkease/openwrt-app-actions && mv -n openwrt-app-actions/applications/luci-app-ap-modem ./; rm -rf openwrt-app-actions
