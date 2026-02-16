@@ -34,6 +34,9 @@ git clone --depth 1 -b openwrt-24.10 https://github.com/sbwml/luci-app-webdav
 git clone --depth 1 -b main https://github.com/sbwml/luci-app-airconnect openwrt-airconnect && mv -n openwrt-airconnect/{airconnect,luci-app-airconnect} ./; rm -rf openwrt-airconnect
 git clone --depth 1 -b master https://github.com/sbwml/luci-app-qbittorrent openwrt-qbittorrent && mv -n openwrt-qbittorrent/{qt6base,qt6tools,rblibtorrent,qbittorrent,luci-app-qbittorrent} ./; rm -rf openwrt-qbittorrent
 git clone --depth 1 -b main https://github.com/linkease/openwrt-app-actions && mv -n openwrt-app-actions/applications/luci-app-ap-modem ./; rm -rf openwrt-app-actions
+git clone --depth 1 -b main https://github.com/linkease/nas-packages-luci && mv -n nas-packages-luci/luci/{luci-app-ddnsto,luci-app-floatip,luci-app-istoreenhance,luci-app-istorex,luci-app-linkease,luci-app-quickstart,luci-app-unishare,luci-lib-iform,luci-mod-istorenext,luci-nginxer} ./; rm -rf nas-packages-luci
+git clone --depth 1 -b master https://github.com/linkease/nas-packages && mv -n nas-packages/multimedia/ffmpeg-remux ./; rm -rf nas-packages
+git clone --depth 1 -b master https://github.com/linkease/nas-packages && mv -n nas-packages/network/services/{ddnsto,floatip,istoreenhance,linkease,linkmount,quickstart,unishare,webdav2} ./; rm -rf nas-packages
 
 sed -i \
 -e 's?include \.\./\.\./\(lang\|devel\)?include $(TOPDIR)/feeds/packages/\1?' \
