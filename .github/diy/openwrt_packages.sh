@@ -26,6 +26,7 @@ git clone --depth 1 -b v5 https://github.com/sbwml/luci-app-mosdns openwrt-mosdn
 git clone --depth 1 -b main https://github.com/sbwml/luci-app-openlist2 openwrt-openlist2 && mv -n openwrt-openlist2/{openlist2,luci-app-openlist2} ./; rm -rf openwrt-openlist2
 git clone --depth 1 -b main https://github.com/sbwml/luci-app-quickfile openwrt-quickfile && mv -n openwrt-quickfile/{quickfile,luci-app-quickfile} ./; rm -rf openwrt-quickfile
 git clone --depth 1 -b main https://github.com/sirpdboy/luci-app-netwizard openwrt-netwizard && mv -n openwrt-netwizard/luci-app-netwizard ./; rm -rf openwrt-netwizard
+git clone --depth 1 -b main https://github.com/sirpdboy/luci-app-partexp openwrt-partexp && mv -n openwrt-partexp/luci-app-partexp ./; rm -rf openwrt-partexp
 git clone --depth 1 -b main https://github.com/Xiaokailnol/luci-app-adguardhome openwrt-adguardhome && mv -n openwrt-adguardhome/luci-app-adguardhome ./; rm -rf openwrt-adguardhome
 git clone --depth 1 -b main https://github.com/timsaya/openwrt-bandix bandix-pkg && mv -n bandix-pkg/openwrt-bandix ./; rm -rf bandix-pkg
 git clone --depth 1 -b main https://github.com/timsaya/luci-app-bandix bandix-luci && mv -n bandix-luci/luci-app-bandix ./; rm -rf bandix-luci
