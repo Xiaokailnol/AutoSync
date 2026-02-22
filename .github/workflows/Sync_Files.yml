@@ -88,7 +88,28 @@ jobs:
       working-directory: /builder
       id: sync
       continue-on-error: true
-      env:
-        git_name: ${{ secrets.username }}
-        git_password: ${{ secrets.password }}
       run: |
+        git clone -b openwrt-25.12 https://github.com/Xiaokailnol/${{ github.event.inputs.target }}.git ${{ github.event.inputs.target }}
+        cd ${{ github.event.inputs.target }}
+        git rm -r --cache * >/dev/null 2>&1 &
+        rm -rf `find ./* -maxdepth 0 -type d ! -name "commit"` >/dev/null 2>&1
+        bash <(curl -sS "http://127.0.0.1:8080/.github/diy/${{ github.event.inputs.target }}.sh")
+        bash <(curl -sS "http://127.0.0.1:8080/.github/diy/convert_translation.sh")
+        bash <(curl -sS "http://127.0.0.1:8080/.github/diy/create_acl_for_luci.sh") -a
+        bash <(curl -sS "http://127.0.0.1:8080/.github/diy/Modify.sh")
+
+    - name: 📤 推送至远程仓库
+      working-directory: /builder
+      env: 
+        ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+      run: |
+        cd ${{ github.event.inputs.target }}
+        if git status --porcelain | grep .; then
+          Emoji=("🎉" "🤞" "✨" "🎁" "🎈" "🎄" "🎨" "💋" "🍓" "🍕" "🍉" "💐" "🌴" "🚀" "🛸" "🗽" "⛅" "🌈" "🔥" "⛄" "🐶" "🏅" "🦄" "🐤")
+          git add .
+          git commit -am "${Emoji[$[$RANDOM % ${#Emoji[@]}]]} Sync $(date +%Y-%m-%d" "%H:%M:%S)"
+          git push --quiet "https://${{ secrets.ACCESS_TOKEN }}@github.com/Xiaokailnol/${{ github.event.inputs.target }}.git" HEAD:openwrt-25.12
+        else
+          echo "nothing to commit"
+          exit 0
+        fi || exit 0
