@@ -27,10 +27,11 @@ jobs:
         shell: bash
 
     steps:
-    - name: Checkout
+    - name: 📥 拉取仓库源码
+      continue-on-error: true
       uses: actions/checkout@main
       with:
-        fetch-depth: 0
+        path: AutoSync
 
     - name: 🚀 Runner 环境准备与 Git 配置
       run : |
@@ -38,3 +39,26 @@ jobs:
         git config --global user.email "2519840456@qq.com"
         git config --global user.name "Xiaokailnol"
 
+    - name: 🖥️ 系统信息展示
+      run: |
+        echo -e "\n\e[1;32mCPU:\e[0m"
+        echo "$(grep 'model name' /proc/cpuinfo | head -1 | awk -F ': ' '{print $2}') ($(grep 'cpu MHz' /proc/cpuinfo | head -1 | awk -F ': ' '{print $2}')MHz) x $(grep processor /proc/cpuinfo  | wc -l)"
+        echo -e "\n\e[1;32mMemory:\e[0m"
+        free -h
+        echo -e "\n\e[1;32mStorage:\e[0m"
+        df -Th / /mnt
+        echo -e "\n\e[1;32mSystem:\e[0m"
+        lsb_release -a
+        echo -e "\n\e[1;32mKernel:\e[0m"
+        uname -a
+        echo
+
+    - name: 🌐 部署 Caddy 服务环境
+      run: |
+        sudo curl -sL -o /usr/bin/caddy https://github.com/Xiaokailnol/AutoSync/releases/download/tools/caddy
+        sudo chmod 755 /usr/bin/caddy
+        echo ":8080 {" > caddyfile
+        echo "    root * $(pwd)/AutoSync" >> caddyfile
+        echo "    file_server browse" >> caddyfile
+        echo "}" >> caddyfile
+        sudo /usr/bin/caddy start --config caddyfile --adapter caddyfile
