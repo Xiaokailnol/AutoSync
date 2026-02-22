@@ -6,10 +6,10 @@
   <img src="https://img.shields.io/github/stars/Xiaokailnol/AutoSync.svg?style=for-the-badge&color=yellow&logo=github&label=Stars" alt="GitHub Stars">
   <img src="https://img.shields.io/github/license/Xiaokailnol/AutoSync.svg?style=for-the-badge&color=blue&logo=gnu&label=License" alt="GitHub License">
   <a href="https://github.com/Xiaokailnol/AutoSync/actions/workflows/openwrt_packages.yml">
-    <img src="https://img.shields.io/github/actions/workflow/status/Xiaokailnol/AutoSync/openwrt_packages.yml?style=for-the-badge&color=green&logo=githubactions&label=Build Status" alt="GitHub Actions">
+    <img src="https://img.shields.io/github/actions/workflow/status/Xiaokailnol/AutoSync/openwrt_packages.yml?style=for-the-badge&color=green&logo=githubactions&label=Build" alt="GitHub Actions">
   </a>
-  <a href="https://github.com/Xiaokailnol/AutoSync/commits/main/">
-    <img src="https://img.shields.io/github/last-commit/Xiaokailnol/AutoSync.svg?style=for-the-badge&color=orange&logo=git&label=Last Commit" alt="Last Commit">
+  <a href="https://github.com/Xiaokailnol/AutoSync/commits/openwrt-25.12/">
+    <img src="https://img.shields.io/github/last-commit/Xiaokailnol/AutoSync/openwrt-25.12.svg?style=for-the-badge&color=orange&logo=git&label=Commit" alt="Last Commit">
   </a>
 </div>
 
