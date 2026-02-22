@@ -9,14 +9,29 @@ on:
         default: 'OpenWrt 插件'
         type: choice
         options:
-          - 'Docker 相关组件'
-          - 'OpenWrt 插件'
-          - 'Golang 编译工具'
-          - 'Realtek 网卡驱动'
-          - '无线内核驱动'        # mt76 + mac80211
-          - 'Rockchip 平台源码'     # target_linux_rockchip-6.x
-          - '通用平台源码'         # target_linux_generic
-
+          - 'openwrt_helloworld'
+          - 'openwrt_packages'
+          - 'luci-app-dockerman'
+          - 'packages_lang_golang'
+          - 'packages_utils_containerd'
+          - 'packages_utils_runc'
+          - 'packages_utils_dockerd'
+          - 'packages_utils_docker'
+          - 'package_kernel_r8125'
+          - 'package_kernel_r8126'
+          - 'package_kernel_r8127'
+          - 'package_kernel_r8101'
+          - 'package_kernel_r8152'
+          - 'package_kernel_r8168'
+          - 'package_kernel_mt76'
+          - 'package_kernel_mac80211'
+          - 'package_utils_util-linux'
+          - 'package_kernel_ath10k-ct'
+          - 'package_firmware_linux-firmware'
+          - 'target_linux_generic'
+          - 'target_linux_rockchip-6.x'
+          - 'target_linux_x86'
+          
 jobs:
   build:
     name: 🟢 同步模块 → ${{ github.event.inputs.target }}
