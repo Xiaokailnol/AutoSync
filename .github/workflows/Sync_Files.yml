@@ -87,7 +87,6 @@ jobs:
     - name: ⚙️ 上游源代码同步与更新
       working-directory: /builder
       id: sync
-      continue-on-error: true
       run: |
         git clone -b openwrt-25.12 https://github.com/Xiaokailnol/${{ github.event.inputs.target }}.git ${{ github.event.inputs.target }}
         cd ${{ github.event.inputs.target }}
@@ -97,8 +96,10 @@ jobs:
         bash <(curl -sS "http://127.0.0.1:8080/.github/diy/convert_translation.sh")
         bash <(curl -sS "http://127.0.0.1:8080/.github/diy/create_acl_for_luci.sh") -a
         bash <(curl -sS "http://127.0.0.1:8080/.github/diy/Modify.sh")
+        echo "status=success" >> ${GITHUB_OUTPUT}
 
     - name: 📤 推送至远程仓库
+      if: ${{ steps.sync.outputs.status == 'success' && !cancelled() }}
       working-directory: /builder
       env: 
         ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
