@@ -1,149 +1,171 @@
-# 🚀 AutoSync - OpenWRT 插件自动同步神器
+# 🚀 AutoSync - OpenWRT 插件自动化同步流水线
 
-> 解放双手，让你的 OpenWRT 插件库始终保持最新状态！
+> 基于 GitHub Actions 的全自动 OpenWRT 插件同步与维护解决方案
 
-[![GitHub Stars](https://img.shields.io/github/stars/Xiaokailnol/AutoSync.svg?style=for-the-badge&color=yellow)](https://github.com/Xiaokailnol/AutoSync/stargazers)
-[![GitHub License](https://img.shields.io/github/license/Xiaokailnol/AutoSync.svg?style=for-the-badge&color=blue)](https://github.com/Xiaokailnol/AutoSync/blob/main/LICENSE)
-[![GitHub Issues](https://img.shields.io/github/issues/Xiaokailnol/AutoSync.svg?style=for-the-badge&color=orange)](https://github.com/Xiaokailnol/AutoSync/issues)
-[![GitHub Pull Requests](https://img.shields.io/github/issues-pr/Xiaokailnol/AutoSync.svg?style=for-the-badge&color=green)](https://github.com/Xiaokailnol/AutoSync/pulls)
+<div align="center">
+  <img src="https://img.shields.io/github/stars/Xiaokailnol/AutoSync.svg?style=for-the-badge&color=yellow&logo=github&label=Stars" alt="GitHub Stars">
+  <img src="https://img.shields.io/github/license/Xiaokailnol/AutoSync.svg?style=for-the-badge&color=blue&logo=gnu&label=License" alt="GitHub License">
+  <img src="https://img.shields.io/github/actions/workflow/status/Xiaokailnol/AutoSync/openwrt_packages.yml?style=for-the-badge&color=green&logo=githubactions&label=Build Status" alt="GitHub Actions">
+  <img src="https://img.shields.io/github/last-commit/Xiaokailnol/AutoSync.svg?style=for-the-badge&color=orange&logo=git&label=Last Commit" alt="Last Commit">
+</div>
 
 ---
 
 ## 📖 项目简介
 
-AutoSync 是一款专为 OpenWRT 打造的插件自动同步工具，旨在帮助开发者和爱好者轻松维护和更新他们的插件库。通过自动化的同步流程，你可以告别手动更新的繁琐，专注于插件的开发和优化。
+AutoSync 是一个基于 GitHub Actions 的 OpenWRT 插件自动化同步项目，专为 OpenWRT 开发者和爱好者打造。通过 GitHub Actions 的强大自动化能力，无需任何服务器资源，即可实现上游插件仓库的定期同步、代码自动优化、翻译转换、ACL 生成等一系列自动化工作流。
 
-无论是个人插件库还是团队协作项目，AutoSync 都能提供稳定、高效的同步服务，确保你的插件始终与上游仓库保持同步，同时支持自定义同步规则和增量更新。
+### ✨ 核心价值
+
+- **💯 零成本运维**：完全基于 GitHub Actions 免费额度运行，无需额外服务器
+- **⚡ 极致自动化**：从同步到优化一键完成，无需人工干预
+- **📦 纯净无污染**：只同步真正需要的插件代码，去除冗余内容
+- **🔧 高度可定制**：通过 Shell 脚本灵活扩展同步逻辑
+- **🌍 多版本支持**：同时维护多个 OpenWRT 版本分支
 
 ---
 
-## ✨ 核心特性
+## 🎯 核心特性
 
-- 🤖 **全自动同步**：支持定时触发、Webhook 触发等多种同步方式，无需人工干预
-- 📦 **增量更新**：只同步变化的内容，节省带宽和时间
-- 🎯 **多源支持**：同时同步多个上游插件仓库到本地
-- ⚙️ **高度可配置**：灵活的配置文件，支持自定义同步规则、过滤条件
-- 📊 **实时监控**：同步状态实时反馈，详细的日志记录便于问题排查
-- 🔒 **安全可靠**：GPLv3 开源许可证，代码透明可审计
-- 🐳 **容器化支持**：Docker 镜像一键部署，跨平台运行
+### 🤖 自动化工作流
+- **定时同步**：每 4 小时自动检测上游仓库更新
+- **手动触发**：支持通过 GitHub UI 手动触发同步
+- **事件驱动**：支持 Repository Dispatch 事件触发
+- **多分支管理**：同时维护多个 OpenWRT 版本分支
+
+### 🛠️ 自动化优化
+- **翻译转换**：自动将插件翻译文件转换为 OpenWRT 兼容格式
+- **ACL 生成**：自动为 LuCI 插件创建访问控制列表
+- **代码修改**：自动应用自定义代码补丁和优化
+- **冗余清理**：自动清理 deprecated 和无用文件
+
+### 📊 智能提交
+- **随机表情**：每次自动提交使用随机 emoji 表情，让提交记录更生动
+- **时间戳**：提交信息包含同步时间，便于追溯
+- **空提交检测**：无更新时自动跳过提交，避免空提交
 
 ---
 
 ## 🚀 快速开始
 
-### 🔧 安装方式
+### 🔧 配置步骤
 
-#### 方法一：直接运行（推荐）
-```bash
-# 克隆仓库
-git clone https://github.com/Xiaokailnol/AutoSync.git
-cd AutoSync
+#### 1. Fork 本仓库
+点击页面右上角的 **Fork** 按钮，将本仓库复制到你的 GitHub 账号下
 
-# 安装依赖
-pip install -r requirements.txt
+#### 2. 创建访问令牌
+1. 进入 GitHub **Settings** → **Developer settings** → **Personal access tokens**
+2. 生成一个新的 token，勾选 `repo` 权限
+3. 复制生成的 token
 
-# 启动服务
-python main.py
-```
+#### 3. 配置仓库 Secrets
+1. 进入你的 Fork 仓库 → **Settings** → **Secrets and variables** → **Actions**
+2. 点击 **New repository secret**
+3. 添加名为 `ACCESS_TOKEN` 的 secret，值为你刚才生成的访问令牌
 
-#### 方法二：Docker 部署
-```bash
-# 拉取镜像
-docker pull xiaokailnol/autosync:latest
+#### 4. 自定义同步逻辑
+1. 编辑 `.github/diy/openwrt_packages.sh` 文件，添加你需要同步的插件仓库
+2. 编辑 `.github/diy/Modify.sh` 文件，添加自定义代码修改逻辑
+3. 调整 `.github/workflows/openwrt_packages.yml` 中的定时同步间隔
 
-# 运行容器
-docker run -d \
-  --name autosync \
-  -p 8000:8000 \
-  -v $(pwd)/config:/app/config \
-  -v $(pwd)/plugins:/app/plugins \
-  xiaokailnol/autosync:latest
-```
-
-### ⚙️ 配置说明
-
-复制并编辑配置文件 `config/config.yaml`：
-
-```yaml
-# 基础配置
-base:
-  sync_interval: 3600  # 同步间隔（秒），0 表示禁用定时同步
-  log_level: INFO       # 日志级别：DEBUG, INFO, WARNING, ERROR
-
-# 上游仓库配置
-upstream_repos:
-  - name: openwrt/packages
-    url: https://github.com/openwrt/packages.git
-    branch: master
-    sync_path: plugins/openwrt
-    filters:
-      include:
-        - net/
-        - utils/
-      exclude:
-        - deprecated/
-
-# 本地存储配置
-local_storage:
-  plugins_dir: ./plugins
-  cache_dir: ./cache
-  max_cache_size: 1024  # 缓存最大大小（MB）
-
-# Webhook 配置（可选）
-webhook:
-  enable: true
-  port: 8000
-  secret: your_webhook_secret_here
-```
-
-### 🎮 使用指南
-
-#### 手动触发同步
-```bash
-python main.py --sync
-```
-
-#### 查看同步日志
-```bash
-tail -f logs/autosync.log
-```
-
-#### 查看当前状态
-```bash
-python main.py --status
-```
+#### 5. 启用 GitHub Actions
+1. 进入你的 Fork 仓库 → **Actions** 页面
+2. 点击 **I understand my workflows, go ahead and enable them**
+3. 选择 `openwrt_packages` workflow，点击 **Run workflow** 手动触发首次同步
 
 ---
 
-## 📚 高级功能
+## 📋 工作流说明
 
-### 🎯 自定义过滤规则
+### 🗂️ 项目结构
 
-支持基于路径的正则表达式过滤：
-
-```yaml
-filters:
-  include:
-    - ^net/.*
-    - ^utils/.*
-  exclude:
-    - ^deprecated/.*
-    - ^docs/.*
+```
+AutoSync/
+├── .github/
+│   ├── workflows/
+│   │   ├── openwrt_packages.yml    # 主工作流配置
+│   │   └── openwrt_helloworld.yml  # 示例工作流
+│   └── diy/
+│       ├── openwrt_packages.sh     # 插件同步逻辑
+│       ├── openwrt_helloworld.sh   # 示例同步脚本
+│       ├── convert_translation.sh  # 翻译转换脚本
+│       ├── create_acl_for_luci.sh  # ACL 生成脚本
+│       └── Modify.sh               # 代码修改脚本
+├── LICENSE                         # GPLv3 许可证
+└── README.md                       # 项目说明文档
 ```
 
-### 🔄 增量同步策略
+### 🔄 同步流程
 
-AutoSync 会自动检测上游仓库的变化，只同步有更新的插件：
-- 基于 Git commit history 检测变化
-- 支持文件级别的增量同步
-- 可配置保留历史版本数量
+```mermaid
+flowchart TD
+    A[定时触发/手动触发] --> B[检查仓库代码]
+    B --> C[初始化 Git 环境]
+    C --> D[克隆目标分支]
+    D --> E[执行同步脚本]
+    E --> F[翻译文件转换]
+    F --> G[生成 LuCI ACL]
+    G --> H[应用自定义修改]
+    H --> I[检查代码变更]
+    I --> J{有变更?}
+    J -->|是| K[提交并推送代码]
+    J -->|否| L[结束流程]
+    K --> L
+```
 
-### 📊 监控与告警
+### ⏰ 定时策略
 
-支持通过 Webhook 发送同步结果通知：
-- 同步成功/失败通知
-- 异常状态告警
-- 支持企业微信、钉钉、Slack 等多种通知渠道
+默认配置为每 4 小时同步一次：
+```yaml
+on:
+  schedule:
+    - cron: 0 */4 * * *  # 每4小时运行一次
+```
+
+你可以根据需要修改为：
+- `0 0 * * *`：每天凌晨同步
+- `0 0 * * 0`：每周日凌晨同步
+- `*/30 * * * *`：每30分钟同步
+
+---
+
+## 🎨 自定义配置
+
+### 📝 同步脚本示例
+
+编辑 `.github/diy/openwrt_packages.sh`：
+
+```bash
+#!/bin/bash
+
+# 同步 openwrt/packages 仓库
+git clone https://github.com/openwrt/packages.git temp_packages
+cp -rf temp_packages/net/* net/
+cp -rf temp_packages/utils/* utils/
+rm -rf temp_packages
+
+# 同步自定义插件仓库
+git clone https://github.com/xxx/xxx-packages.git temp_custom
+cp -rf temp_custom/* ./
+rm -rf temp_custom
+```
+
+### 🔧 自定义修改
+
+编辑 `.github/diy/Modify.sh`：
+
+```bash
+#!/bin/bash
+
+# 修改插件版本号
+sed -i 's/1.0.0/2.0.0/g' package/xxx/Makefile
+
+# 替换镜像源
+sed -i 's/downloads.openwrt.org/mirrors.tuna.tsinghua.edu.cn\/openwrt/g' package/feeds/packages/*/Makefile
+
+# 添加自定义补丁
+patch -p1 < $GITHUB_WORKSPACE/patches/xxx.patch
+```
 
 ---
 
@@ -151,24 +173,35 @@ AutoSync 会自动检测上游仓库的变化，只同步有更新的插件：
 
 我们非常欢迎社区贡献！无论是代码、文档、bug 报告还是功能建议，都可以通过以下方式参与：
 
-1. Fork 本仓库
-2. 创建特性分支：`git checkout -b feature/AmazingFeature`
-3. 提交更改：`git commit -m 'Add some AmazingFeature'`
-4. 推送到分支：`git push origin feature/AmazingFeature`
-5. 打开 Pull Request
+### 📋 贡献步骤
 
-### 📋 开发规范
+1. Fork 本仓库到你的 GitHub 账号
+2. 创建特性分支：
+   ```bash
+   git checkout -b feature/AmazingFeature
+   ```
+3. 提交你的更改：
+   ```bash
+   git commit -m 'Add some AmazingFeature'
+   ```
+4. 推送到分支：
+   ```bash
+   git push origin feature/AmazingFeature
+   ```
+5. 打开 Pull Request，描述你的变更内容
 
-- 遵循 PEP 8 代码规范
-- 为新功能编写测试用例
-- 确保所有测试通过
-- 更新相关文档
+### 📌 贡献规范
+
+- 遵循 Shell 脚本编写规范，使用 `shellcheck` 检查代码
+- 保持脚本简洁明了，添加必要的注释
+- 确保所有工作流能够正常通过
+- 更新相关文档说明
 
 ---
 
 ## 📄 许可证
 
-本项目采用 GNU General Public License v3.0 许可证，详见 [LICENSE](LICENSE) 文件。
+本项目采用 **GNU General Public License v3.0** 开源许可证，详见 [LICENSE](LICENSE) 文件。
 
 ---
 
@@ -177,18 +210,26 @@ AutoSync 会自动检测上游仓库的变化，只同步有更新的插件：
 感谢以下开源项目和社区的支持：
 
 - [OpenWRT](https://openwrt.org/) - 优秀的开源路由器操作系统
-- [GitPython](https://gitpython.readthedocs.io/) - Git 操作 Python 库
-- [PyYAML](https://pyyaml.org/) - YAML 解析库
-- [FastAPI](https://fastapi.tiangolo.com/) - 现代快速的 Web 框架
+- [GitHub Actions](https://github.com/features/actions) - 强大的自动化 CI/CD 平台
+- [Lean's OpenWRT](https://github.com/coolsnowwolf/lede) - 提供了丰富的插件资源
+- [P3TERX](https://github.com/P3TERX/Actions-OpenWrt) - 启发了本项目的自动化思路
 
 ---
 
 ## 📞 联系方式
 
-- 项目地址：[https://github.com/Xiaokailnol/AutoSync](https://github.com/Xiaokailnol/AutoSync)
-- Issue 反馈：[https://github.com/Xiaokailnol/AutoSync/issues](https://github.com/Xiaokailnol/AutoSync/issues)
-- 邮件咨询：xiaokailnol@example.com
+<div align="center">
+  <a href="https://github.com/Xiaokailnol/AutoSync/issues" style="margin: 0 10px;">
+    <img src="https://img.shields.io/badge/Issues-GitHub-red?style=for-the-badge&logo=github" alt="Issues">
+  </a>
+  <a href="mailto:2519840456@qq.com" style="margin: 0 10px;">
+    <img src="https://img.shields.io/badge/Email-Q%E7%94%B5%E5%AD%90-blue?style=for-the-badge&logo=qq" alt="Email">
+  </a>
+</div>
 
 ---
 
-⭐ 如果这个项目对你有帮助，请给个 Star 支持一下！
+<div align="center">
+  <h3>⭐ 如果这个项目对你有帮助，请给个 Star 支持一下！</h3>
+  <p>你的支持是我们持续开发的动力！</p>
+</div>
