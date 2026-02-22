@@ -31,4 +31,9 @@ jobs:
       with:
         fetch-depth: 0
 
-        
+    - name: 🚀 Runner 环境准备与 Git 配置
+      run : |
+        sudo timedatectl set-timezone 'Asia/Shanghai'
+        git config --global user.email "2519840456@qq.com"
+        git config --global user.name "Xiaokailnol"
+
