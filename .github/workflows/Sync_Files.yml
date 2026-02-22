@@ -38,6 +38,7 @@ jobs:
         sudo timedatectl set-timezone 'Asia/Shanghai'
         git config --global user.email "2519840456@qq.com"
         git config --global user.name "Xiaokailnol"
+        echo build_dir="/builder" >> "$GITHUB_ENV"
 
     - name: 🖥️ 系统信息展示
       run: |
@@ -62,3 +63,17 @@ jobs:
         echo "    file_server browse" >> caddyfile
         echo "}" >> caddyfile
         sudo /usr/bin/caddy start --config caddyfile --adapter caddyfile
+
+    - name: 💾 可用磁盘空间
+      uses: Xiaokailnol/actions@free-disk
+      with:
+        build-mount-path: /builder
+        
+    - name: ⚙️ 上游源代码同步与更新
+      working-directory: /builder
+      id: sync
+      continue-on-error: true
+      env:
+        git_name: ${{ secrets.username }}
+        git_password: ${{ secrets.password }}
+      run: |
