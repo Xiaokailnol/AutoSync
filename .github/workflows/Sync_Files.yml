@@ -1,0 +1,34 @@
+name: 🤖 同步更新
+
+on:
+  workflow_dispatch:
+    inputs:
+      target:
+        description: '选择要同步的 OpenWrt 上游组件'
+        required: true
+        default: 'OpenWrt 插件'
+        type: choice
+        options:
+          - 'Docker 相关组件'
+          - 'OpenWrt 插件'
+          - 'Golang 编译工具'
+          - 'Realtek 网卡驱动'
+          - '无线内核驱动'        # mt76 + mac80211
+          - 'Rockchip 平台源码'     # target_linux_rockchip-6.x
+          - '通用平台源码'         # target_linux_generic
+
+jobs:
+  build:
+    name: 🟢 同步模块 → ${{ github.event.inputs.target }}
+    runs-on: ubuntu-24.04
+    defaults:
+      run:
+        shell: bash
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@main
+      with:
+        fetch-depth: 0
+
+        
