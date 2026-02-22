@@ -6,7 +6,7 @@ on:
       target:
         description: '选择要同步的 OpenWrt 上游组件'
         required: true
-        default: 'OpenWrt 插件'
+        default: 'openwrt_helloworld'
         type: choice
         options:
           - 'openwrt_helloworld'
