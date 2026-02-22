@@ -17,7 +17,7 @@ jobs:
             const { data: runs } = await github.rest.actions.listWorkflowRunsForRepo({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              per_page: 200
+              per_page: 100
             });
             
             // 遍历删除每个运行记录
