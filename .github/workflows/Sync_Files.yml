@@ -20,6 +20,7 @@ on:
 jobs:
   build:
     name: 🟢 同步模块 → ${{ github.event.inputs.target }}
+    if: github.event.repository.owner.id == github.event.sender.id || ! github.event.sender.id
     runs-on: ubuntu-24.04
     defaults:
       run:
