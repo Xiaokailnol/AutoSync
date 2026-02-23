@@ -31,7 +31,9 @@ on:
           - 'target_linux_generic'
           - 'target_linux_rockchip-6.x'
           - 'target_linux_x86'
-          
+  schedule:
+    - cron: '0 16 * * *'   # 北京时间每天 00:00
+    
 jobs:
   build:
     name: 🟢 同步模块 → ${{ github.event.inputs.target }}
