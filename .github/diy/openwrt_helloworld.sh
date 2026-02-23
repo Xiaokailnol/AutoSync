@@ -15,7 +15,7 @@ mv -n `find $1/* -maxdepth 0 -type d` ./
 rm -rf $1
 }
 git clone --depth 1 -b main https://github.com/Openwrt-Passwall/openwrt-passwall-packages passwall-packages && mv -n passwall-packages/{chinadns-ng,dns2socks,geoview,hysteria,ipt2socks,microsocks,naiveproxy,shadow-tls,shadowsocks-libev,shadowsocksr-libev,simple-obfs,sing-box,tcping,trojan-plus,tuic-client,v2ray-geodata,v2ray-plugin,xray-core,xray-plugin} ./; rm -rf passwall-packages
-git clone --depth 1 -b v5 https://github.com/sbwml/openwrt_helloworld openwrt_helloworld && mv -n openwrt_helloworld/{shadowsocks-rust,daed,luci-app-daed} ./ ; rm -rf openwrt_helloworld
+git clone --depth 1 -b v5 https://github.com/sbwml/openwrt_helloworld openwrt_helloworld && mv -n openwrt_helloworld/{pdnsd,shadowsocks-rust,daed,luci-app-daed} ./ ; rm -rf openwrt_helloworld
 git clone --depth 1 -b v5 https://github.com/sbwml/luci-app-mosdns openwrt-mosdns && mv -n openwrt-mosdns/mosdns ./; rm -rf openwrt-mosdns
 git clone --depth 1 https://github.com/vernesong/OpenClash && mv -n OpenClash/luci-app-openclash ./; rm -rf OpenClash
 git clone --depth 1 -b main https://github.com/Openwrt-Passwall/openwrt-passwall passwall1 && mv -n passwall1/luci-app-passwall  ./; rm -rf passwall1
