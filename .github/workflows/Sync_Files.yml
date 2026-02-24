@@ -93,10 +93,14 @@ jobs:
         cd ${{ github.event.inputs.target }}
         git rm -r --cache * >/dev/null 2>&1 &
         rm -rf `find ./* -maxdepth 0 -type d ! -name "commit"` >/dev/null 2>&1
-        bash <(curl -sS "http://127.0.0.1:8080/.github/diy/${{ github.event.inputs.target }}.sh")
-        bash <(curl -sS "http://127.0.0.1:8080/.github/diy/convert_translation.sh")
-        bash <(curl -sS "http://127.0.0.1:8080/.github/diy/create_acl_for_luci.sh") -a
-        bash <(curl -sS "http://127.0.0.1:8080/.github/diy/Modify.sh")
+        if [[ "${{ github.event.inputs.target }}" == "openwrt_helloworld" || "${{ github.event.inputs.target }}" == "openwrt_packages" ]]; then
+          bash <(curl -sS "http://127.0.0.1:8080/.github/diy/${{ github.event.inputs.target }}.sh")
+          bash <(curl -sS "http://127.0.0.1:8080/.github/diy/convert_translation.sh")
+          bash <(curl -sS "http://127.0.0.1:8080/.github/diy/create_acl_for_luci.sh") -a
+          bash <(curl -sS "http://127.0.0.1:8080/.github/diy/Modify.sh")
+        else
+          bash <(curl -sS "http://127.0.0.1:8080/.github/diy/openwrt_target.sh") ${{ github.event.inputs.target }}
+        fi  
         echo "status=success" >> ${GITHUB_OUTPUT}
 
     - name: 📤 推送至远程仓库
