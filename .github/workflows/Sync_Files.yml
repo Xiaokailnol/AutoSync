@@ -11,24 +11,6 @@ on:
         options:
           - 'openwrt_helloworld'
           - 'openwrt_packages'
-          - 'packages_utils_containerd'
-          - 'packages_utils_runc'
-          - 'packages_utils_dockerd'
-          - 'packages_utils_docker'
-          - 'package_kernel_r8125'
-          - 'package_kernel_r8126'
-          - 'package_kernel_r8127'
-          - 'package_kernel_r8101'
-          - 'package_kernel_r8152'
-          - 'package_kernel_r8168'
-          - 'package_kernel_mt76'
-          - 'package_kernel_mac80211'
-          - 'package_utils_util-linux'
-          - 'package_kernel_ath10k-ct'
-          - 'package_firmware_linux-firmware'
-          - 'target_linux_generic'
-          - 'target_linux_rockchip-6.x'
-          - 'target_linux_x86'
   schedule:
     - cron: '0 16 * * *'   # 北京时间每天 00:00
     
@@ -92,14 +74,10 @@ jobs:
         cd ${{ github.event.inputs.target }}
         git rm -r --cache * >/dev/null 2>&1 &
         rm -rf `find ./* -maxdepth 0 -type d ! -name "commit"` >/dev/null 2>&1
-        if [[ "${{ github.event.inputs.target }}" == "openwrt_helloworld" || "${{ github.event.inputs.target }}" == "openwrt_packages" ]]; then
-          bash <(curl -sS "http://127.0.0.1:8080/.github/diy/${{ github.event.inputs.target }}.sh")
-          bash <(curl -sS "http://127.0.0.1:8080/.github/diy/convert_translation.sh")
-          bash <(curl -sS "http://127.0.0.1:8080/.github/diy/create_acl_for_luci.sh") -a
-          bash <(curl -sS "http://127.0.0.1:8080/.github/diy/Modify.sh")
-        else
-          bash <(curl -sS "http://127.0.0.1:8080/.github/diy/openwrt_target.sh") ${{ github.event.inputs.target }}
-        fi  
+        bash <(curl -sS "http://127.0.0.1:8080/.github/diy/${{ github.event.inputs.target }}.sh")
+        bash <(curl -sS "http://127.0.0.1:8080/.github/diy/convert_translation.sh")
+        bash <(curl -sS "http://127.0.0.1:8080/.github/diy/create_acl_for_luci.sh") -a
+        bash <(curl -sS "http://127.0.0.1:8080/.github/diy/Modify.sh") 
         echo "status=success" >> ${GITHUB_OUTPUT}
 
     - name: 📤 推送至远程仓库
