@@ -14,6 +14,7 @@ function mvdir() {
 mv -n `find $1/* -maxdepth 0 -type d` ./
 rm -rf $1
 }
+git clone --depth 1 -b openwrt-25.12 https://github.com/Xiaokailnol/default-settings
 git clone --depth 1 -b master https://github.com/sirpdboy/luci-theme-kucat
 git clone --depth 1 -b master https://github.com/sirpdboy/luci-app-kucat-config
 git clone --depth 1 -b master https://github.com/eamonxg/luci-theme-aurora
