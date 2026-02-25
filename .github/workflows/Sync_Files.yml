@@ -1,7 +1,4 @@
 name: 🤖 同步更新
-
-permissions:
-  contents: write
   
 on:
   workflow_dispatch:
@@ -14,8 +11,6 @@ on:
         options:
           - 'openwrt_helloworld'
           - 'openwrt_packages'
-  schedule:
-    - cron: '0 16 * * *'   # 北京时间每天 00:00
     
 jobs:
   build:
